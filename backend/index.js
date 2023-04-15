@@ -78,9 +78,37 @@ app.post("/students", urlParser, (req, res) => {
 
 });
 
-app.put("/students", (req, res) => {
-    res.send("PUT student!");
-});
+
+// Edit
+app.put('/students/:MaSV', urlParser, (req, res) => {
+    const mssv = req.params.MaSV; // get the mssv from the URL parameter
+    const updatedStudent = req.body; // get the updated student data from the request body
+  
+    // Find the index of the student with the specified mssv value
+    const index = dssv.findIndex(student => student.MaSV === mssv);
+    console.log(index);
+    if (index === -1) {
+      // If the student is not found, send a 404 response
+      res.status(404).send('Student not found');
+    } else {
+      // Update the properties of the student object at the specified index
+      dssv[index].HoTen = updatedStudent.HoTen;
+      dssv[index].Lop = updatedStudent.Lop;
+      dssv[index].GioiTinh = updatedStudent.GioiTinh;
+      dssv[index].NgaySinh = updatedStudent.NgaySinh;
+  
+      // Write the updated data to the JSON file
+      fs.writeFile('DSSV.json', JSON.stringify(dssv), err => {
+        if (err) {
+          console.log(err);
+          res.status(500).send('Server error');
+        } else {
+          res.send('Cập nhật thanh công!');
+        }
+      });
+    }
+  });
+
 
 //Delete
 app.delete("/students", urlParser, (req, res) => {

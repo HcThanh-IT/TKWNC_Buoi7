@@ -66,31 +66,33 @@ function createSV() {
 //     $("#txtNgaySinh").val(sv.NgaySinh);
 // }
 
-function updateSV(mssv, index) {
+
+
+function openModalSV(MaSV, index) {
     fetch('http://localhost:3000/students')
       .then(response => response.json())
       .then(students => {
-        console.log(students); // This will log the array of students to the console
+        // console.log(students); // This will log the array of students to the console
   
         // Use forEach() to iterate over each student in the array
         students.forEach((student, i) => {
           if (i === index) {
             console.log(student);
-            document.querySelector("#currentID").value = index;
-            document.querySelector("#txtCodeEdit").value = student.MaSV;
-            document.querySelector("#txtNameEdit").value = student.HoTen;
-            document.querySelector("#txtClassEdit").value = student.Lop;
-            document.querySelector("#dateEdit").value = student.NgaySinh;
+            // document.querySelector("#currentID").value = index;
+            document.querySelector("#txtEditMSSV").value = student.MaSV;
+            document.querySelector("#txtEditHoTen").value = student.HoTen;
+            document.querySelector("#txtEditLop").value = student.Lop;
+            document.querySelector("#txtEditNgaySinh").value = student.NgaySinh;
   
             if (student.GioiTinh === "Nam") {
-              document.querySelector('#male').checked = true;
+              document.querySelector('#EditNam').checked = true;
             }
             if (student.GioiTinh === "Nữ") {
-              document.querySelector('#female').checked = true;
+              document.querySelector('#EditNu').checked = true;
             }
   
             // Show the modal
-            $('#modalEdit').modal('show');
+            $('#modalEditSV').modal('show');
           }
         });
       })
@@ -100,7 +102,7 @@ function updateSV(mssv, index) {
       });
   
     // Get the modal
-    var modal = document.getElementById("modalEdit");
+    var modal = document.getElementById("modalEditSV");
   
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -109,9 +111,9 @@ function updateSV(mssv, index) {
     modal.style.display = "block";
   
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      modal.style.display = "none";
-    }
+    // span.onclick = function () {
+    //   modal.style.display = "none";
+    // }
   
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
@@ -121,6 +123,29 @@ function updateSV(mssv, index) {
     }
   }
   
+
+  function updateSV() {
+    var gt = $('input[name="EditGioiTinh"]:checked').val();
+    var data = {
+      "MaSV": $("#txtEditMSSV").val(),
+      "HoTen": $("#txtEditHoTen").val(),
+      "Lop": $("#txtEditLop").val(),
+      "GioiTinh": gt,
+      "NgaySinh": $("#txtEditNgaySinh").val(),
+    };
+    var studentCode = $("#txtEditMSSV").val();
+    console.log(studentCode);
+    $.ajax({
+      method: "PUT",
+      url: "http://localhost:3000/students/" + studentCode,
+      data: data
+    })
+      .done(function (res) {
+        if (res.success) alert(res.msg);
+        else alert("Update student success");
+      }).fail(function (jqXHR, textStatus, errorThrown) { console.log(textStatus) });
+  
+  }
 
 function delSV(MaSV){
     if(confirm("Bạn có chắc chắn muốn xóa không?")){

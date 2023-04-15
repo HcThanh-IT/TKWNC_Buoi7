@@ -148,7 +148,7 @@
                   <div class="mb-3 row">
                     <label for="txtMSSV" class="col-sm-3 col-form-label">MSSV:</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="txtMSSV" placeholder="Nhập MSSV">
+                      <input type="text" class="form-control" id="txtEditMSSV" placeholder="Nhập MSSV">
                     </div>
                   </div>
 
@@ -156,7 +156,7 @@
                   <div class="mb-3 row">
                     <label for="txtHoTen" class="col-sm-3 col-form-label">Họ Tên:</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="txtHoTen" placeholder="Nhập Họ Tên">
+                      <input type="text" class="form-control" id="txtEditHoTen" placeholder="Nhập Họ Tên">
                     </div>
                   </div>
 
@@ -164,7 +164,7 @@
                   <div class="mb-3 row">
                     <label for="txtLop" class="col-sm-3 col-form-label">Lớp:</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="txtLop">
+                      <input type="text" class="form-control" id="txtEditLop">
                     </div>
                   </div>
 
@@ -173,11 +173,11 @@
                     <label for="txtGioiTinh" class="col-sm-3 col-form-label">Giới tính:</label>
                     <div class="col-sm-9">
                       <div class="form-check col-sm-6">
-                        <input class="form-check-input" type="radio" name="GioiTinh" id="Nam" checked value="Nam">
+                        <input class="form-check-input" type="radio" name="EditGioiTinh" id="EditNam" value="Nam">
                         <label class="form-check-label" for="radioNam">Nam</label>
                       </div>
                       <div class="form-check col-sm-6">
-                        <input class="form-check-input" type="radio" name="GioiTinh" id="Nu" value="Nữ">
+                        <input class="form-check-input" type="radio" name="EditGioiTinh" id="EditNu" value="Nữ">
                         <label class="form-check-label" for="radioNu">Nữ</label>
                       </div>
                     </div>
@@ -187,7 +187,7 @@
                   <div class="mb-3 row">
                     <label for="txtNgaySinh" class="col-sm-3 col-form-label">Ngày sinh</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control datetimepicker" name="date" id="txtNgaySinh" readonly>
+                      <input type="text" class="form-control datetimepicker" name="date" id="txtEditNgaySinh" readonly>
                     </div>
                   </div>
                 </div>
@@ -236,7 +236,7 @@
       <td>${GioiTinh}</td>
       <td>${NgaySinh}</td>
       <td>
-        <button class="btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditSV">Edit</button>
+        <button class="btn-sm btn-warning" onclick="openModalSV(${MaSV},${STT-1})">Edit</button>
         <button class="btn-sm btn-danger" onclick="delSV('${MaSV}')">Delete</button>
       </td>
     </tr>
