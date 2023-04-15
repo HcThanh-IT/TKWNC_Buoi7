@@ -81,7 +81,31 @@ app.post("/students", urlParser, (req, res) => {
 app.put("/students", (req, res) => {
     res.send("PUT student!");
 });
-app.delete("/students", (req, res) => {
-    res.send("DELETE student!");
+
+//Delete
+app.delete("/students", urlParser, (req, res) => {
+    var sv = req.body;
+    var i = dssv.findIndex(item => item.MaSV === sv.MaSV);
+    console.log(i);
+    if (i != null || i != undefined) {
+       dssv.splice(i,1);
+       fs.writeFile('DSSV.json', JSON.stringify(dssv), err => {
+        if(err){
+         console.log(err);
+        }
+        else {
+         console.log("OK");
+        }
+        var obj = {
+            success: true, msg: "Xoá thành công!"
+        };
+        res.send(obj);
+     });
+    }
+    
+
 });
+
+
+
 app.listen(port, () => console.log(`App is running at port ${port}`));

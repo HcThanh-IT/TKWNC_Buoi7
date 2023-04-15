@@ -43,11 +43,11 @@
         <table class="table table-striped">
           <thead class="thead-light">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalSV">
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalAddSV">
               Add Students
             </button>
-            <!-- Modal -->
-            <div class="modal" id="modalSV" tabindex="-1">
+            <!-- Modal add-->
+            <div class="modal" id="modalAddSV" tabindex="-1">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -103,11 +103,6 @@
                       </div>
 
                     </div>
-
-
-
-
-
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -121,8 +116,8 @@
               <th scope="col">Mã SV</th>
               <th scope="col">Họ Tên</th>
               <th scope="col">Lớp</th>
-              <!-- <th scope="col">Giới tính</th>
-              <th scope="col">Ngày sinh</th> -->
+              <th scope="col">Giới tính</th>
+              <th scope="col">Ngày sinh</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -138,6 +133,74 @@
               </td>
             </tr>
           </tbody>
+          
+          <!-- Modal Edit -->
+          <div class="modal" id="modalEditSV" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit Students</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                  <!-- MSSV -->
+                  <div class="mb-3 row">
+                    <label for="txtMSSV" class="col-sm-3 col-form-label">MSSV:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="txtMSSV" placeholder="Nhập MSSV">
+                    </div>
+                  </div>
+
+                  <!-- Họ Và Tên -->
+                  <div class="mb-3 row">
+                    <label for="txtHoTen" class="col-sm-3 col-form-label">Họ Tên:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="txtHoTen" placeholder="Nhập Họ Tên">
+                    </div>
+                  </div>
+
+                  <!-- Lớp -->
+                  <div class="mb-3 row">
+                    <label for="txtLop" class="col-sm-3 col-form-label">Lớp:</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="txtLop">
+                    </div>
+                  </div>
+
+                  <!-- Giới Tính -->
+                  <div class="mb-3 row">
+                    <label for="txtGioiTinh" class="col-sm-3 col-form-label">Giới tính:</label>
+                    <div class="col-sm-9">
+                      <div class="form-check col-sm-6">
+                        <input class="form-check-input" type="radio" name="GioiTinh" id="Nam" checked value="Nam">
+                        <label class="form-check-label" for="radioNam">Nam</label>
+                      </div>
+                      <div class="form-check col-sm-6">
+                        <input class="form-check-input" type="radio" name="GioiTinh" id="Nu" value="Nữ">
+                        <label class="form-check-label" for="radioNu">Nữ</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Ngày Sinh -->
+                  <div class="mb-3 row">
+                    <label for="txtNgaySinh" class="col-sm-3 col-form-label">Ngày sinh</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control datetimepicker" name="date" id="txtNgaySinh" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button onclick="updateSV()" type="button" class="btn btn-primary">Update changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
         </table>
       </div>
       </thead>
@@ -173,8 +236,8 @@
       <td>${GioiTinh}</td>
       <td>${NgaySinh}</td>
       <td>
-        <button class="btn-sm btn-warning">Edit</button>
-        <button class="btn-sm btn-danger">Delete</button>
+        <button class="btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditSV">Edit</button>
+        <button class="btn-sm btn-danger" onclick="delSV('${MaSV}')">Delete</button>
       </td>
     </tr>
   </script>
